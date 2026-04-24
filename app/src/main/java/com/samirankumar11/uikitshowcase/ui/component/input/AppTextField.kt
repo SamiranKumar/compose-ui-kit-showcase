@@ -6,6 +6,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.samirankumar11.uikitshowcase.ui.theme.AppShapes
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
@@ -19,6 +21,7 @@ fun AppTextField(
     placeholder: String? = null,
     isError: Boolean = false,
     errorMessage: String? = null,
+    passwordVisible: Boolean = false,
 ) {
     Column(
         modifier = modifier,
@@ -28,6 +31,11 @@ fun AppTextField(
             onValueChange = onValueChange,
             shape = AppShapes.medium,
             isError = isError,
+            visualTransformation = if (passwordVisible) {
+                VisualTransformation.None
+            } else {
+                PasswordVisualTransformation()
+            },
             label = label?.let {
                 { Text(text = it) }
             },
@@ -44,6 +52,8 @@ fun AppTextField(
         }
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
@@ -80,6 +90,20 @@ private fun AppTextFieldErrorPreview() {
             placeholder = "Enter your email",
             isError = true,
             errorMessage = "Invalid email address",
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun AppTextFieldPasswordPreview() {
+    ComposeUiKitShowcaseTheme {
+        AppTextField(
+            value = "password123",
+            onValueChange = {},
+            label = "Password",
+            placeholder = "Enter password",
+            passwordVisible = false,
         )
     }
 }
