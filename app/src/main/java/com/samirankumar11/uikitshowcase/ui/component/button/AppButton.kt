@@ -17,6 +17,7 @@ fun AppButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    isLoading: Boolean = false
 ) {
     Button(
         onClick = onClick,
@@ -25,10 +26,15 @@ fun AppButton(
         enabled = enabled,
         shape = AppShapes.medium,
     ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.labelLarge,
-        )
+        if (isLoading) {
+            Text(text = "Loading")
+        } else {
+            Text(
+                text = text,
+                style = MaterialTheme.typography.labelLarge,
+            )
+        }
+
     }
 }
 
@@ -52,6 +58,23 @@ private fun AppButtonDisabledPreview() {
             text = "Disabled",
             onClick = {},
             enabled = false,
+        )
+    }
+}
+
+
+@Preview(
+    showBackground = true,
+    widthDp = 100,
+    heightDp = 40
+)
+@Composable
+private fun AppButtonLoadingPreview() {
+    ComposeUiKitShowcaseTheme {
+        AppButton(
+            text = "Login",
+            onClick = {},
+            isLoading = true,
         )
     }
 }
