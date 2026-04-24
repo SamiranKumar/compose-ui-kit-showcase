@@ -1,5 +1,7 @@
 package com.samirankumar11.uikitshowcase.ui.component.input
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,19 +17,32 @@ fun AppTextField(
     modifier: Modifier = Modifier,
     label: String? = null,
     placeholder: String? = null,
+    isError: Boolean = false,
+    errorMessage: String? = null,
 ) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
+    Column(
         modifier = modifier,
-        shape = AppShapes.medium,
-        label = label?.let {
-            { Text(text = it) }
-        },
-        placeholder = placeholder?.let {
-            { Text(text = it) }
-        },
-    )
+    ) {
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            shape = AppShapes.medium,
+            isError = isError,
+            label = label?.let {
+                { Text(text = it) }
+            },
+            placeholder = placeholder?.let {
+                { Text(text = it) }
+            },
+        )
+
+        if (isError && errorMessage != null) {
+            Text(
+                text = errorMessage,
+                color = MaterialTheme.colorScheme.error,
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)
@@ -50,6 +65,21 @@ private fun AppTextFieldLabelPreview() {
             onValueChange = {},
             label = "Email",
             placeholder = "Enter your email",
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun AppTextFieldErrorPreview() {
+    ComposeUiKitShowcaseTheme {
+        AppTextField(
+            value = "",
+            onValueChange = {},
+            label = "Email",
+            placeholder = "Enter your email",
+            isError = true,
+            errorMessage = "Invalid email address",
         )
     }
 }
