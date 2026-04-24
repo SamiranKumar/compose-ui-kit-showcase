@@ -22,6 +22,8 @@ fun AppTextField(
     isError: Boolean = false,
     errorMessage: String? = null,
     passwordVisible: Boolean = false,
+    leadingIcon: (@Composable (() -> Unit))? = null,
+    trailingIcon: (@Composable (() -> Unit))? = null,
 ) {
     Column(
         modifier = modifier,
@@ -42,6 +44,8 @@ fun AppTextField(
             placeholder = placeholder?.let {
                 { Text(text = it) }
             },
+            leadingIcon = leadingIcon,
+            trailingIcon = trailingIcon,
         )
 
         if (isError && errorMessage != null) {
@@ -52,7 +56,6 @@ fun AppTextField(
         }
     }
 }
-
 
 
 @Preview(showBackground = true)
@@ -104,6 +107,40 @@ private fun AppTextFieldPasswordPreview() {
             label = "Password",
             placeholder = "Enter password",
             passwordVisible = false,
+        )
+    }
+}
+
+
+
+@Preview(showBackground = true)
+@Composable
+private fun AppTextFieldLeadingIconPreview() {
+    ComposeUiKitShowcaseTheme {
+        AppTextField(
+            value = "",
+            onValueChange = {},
+            label = "Email",
+            placeholder = "Enter email",
+            leadingIcon = {
+                Text("@")
+            },
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun AppTextFieldTrailingIconPreview() {
+    ComposeUiKitShowcaseTheme {
+        AppTextField(
+            value = "",
+            onValueChange = {},
+            label = "Search",
+            placeholder = "Search...",
+            trailingIcon = {
+                Text("X")
+            },
         )
     }
 }
