@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.samirankumar11.uikitshowcase.ui.component.button.AppButton
+import com.samirankumar11.uikitshowcase.ui.component.input.AppTextField
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
 @Composable
@@ -41,19 +42,42 @@ fun UiKitShowcaseScreen(
             isLoading = true,
         )
 
-        AppButton(
-            text = "Leading Icon",
-            onClick = {},
-            leadingIcon = {
-                Text("→")
-            },
+        Text(text = "AppTextField")
+
+        AppTextField(
+            value = "",
+            onValueChange = {},
+            label = "Email",
+            placeholder = "Enter your email",
         )
 
-        AppButton(
-            text = "Trailing Icon",
-            onClick = {},
+        AppTextField(
+            value = "",
+            onValueChange = {},
+            label = "Email",
+            placeholder = "Enter your email",
+            isError = true,
+            errorMessage = "Invalid email address",
+        )
+
+        AppTextField(
+            value = "password123",
+            onValueChange = {},
+            label = "Password",
+            placeholder = "Enter password",
+            passwordVisible = false,
+        )
+
+        AppTextField(
+            value = "",
+            onValueChange = {},
+            label = "Search",
+            placeholder = "Search...",
+            leadingIcon = {
+                Text("@")
+            },
             trailingIcon = {
-                Text("→")
+                Text("X")
             },
         )
     }
