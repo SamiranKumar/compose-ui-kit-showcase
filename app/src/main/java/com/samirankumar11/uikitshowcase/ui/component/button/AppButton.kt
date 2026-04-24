@@ -13,6 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.samirankumar11.uikitshowcase.ui.theme.AppShapes
 import com.samirankumar11.uikitshowcase.ui.theme.AppSpacing
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Icon
+
 
 @Composable
 fun AppButton(
@@ -20,7 +23,8 @@ fun AppButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    isLoading: Boolean = false
+    isLoading: Boolean = false,
+    leadingIcon: (@Composable (() -> Unit))? = null
 ) {
     Button(
         onClick = onClick,
@@ -36,12 +40,15 @@ fun AppButton(
                 strokeWidth = 2.dp,
             )
         } else {
+            if (leadingIcon != null) {
+                leadingIcon()
+            }
+
             Text(
                 text = text,
                 style = MaterialTheme.typography.labelLarge,
             )
         }
-
     }
 }
 
@@ -82,6 +89,20 @@ private fun AppButtonLoadingPreview() {
             text = "Login",
             onClick = {},
             isLoading = true,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun AppButtonLeadingIconPreview() {
+    ComposeUiKitShowcaseTheme {
+        AppButton(
+            text = "Login",
+            onClick = {},
+            leadingIcon = {
+                Text("→")
+            },
         )
     }
 }
