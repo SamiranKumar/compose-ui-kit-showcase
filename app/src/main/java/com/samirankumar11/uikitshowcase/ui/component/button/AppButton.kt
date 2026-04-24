@@ -1,5 +1,6 @@
 package com.samirankumar11.uikitshowcase.ui.component.button
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -13,8 +14,6 @@ import androidx.compose.ui.unit.dp
 import com.samirankumar11.uikitshowcase.ui.theme.AppShapes
 import com.samirankumar11.uikitshowcase.ui.theme.AppSpacing
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material3.Icon
 
 
 @Composable
@@ -24,7 +23,8 @@ fun AppButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     isLoading: Boolean = false,
-    leadingIcon: (@Composable (() -> Unit))? = null
+    leadingIcon: (@Composable (() -> Unit))? = null,
+    trailingIcon: (@Composable (() -> Unit))? = null
 ) {
     Button(
         onClick = onClick,
@@ -48,8 +48,14 @@ fun AppButton(
                 text = text,
                 style = MaterialTheme.typography.labelLarge,
             )
+
+            if (trailingIcon != null) {
+                trailingIcon()
+            }
         }
     }
+
+
 }
 
 
@@ -102,6 +108,26 @@ private fun AppButtonLeadingIconPreview() {
             onClick = {},
             leadingIcon = {
                 Text("→")
+            },
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 100,
+    heightDp = 40
+)
+@Composable
+private fun AppButtonTrailingIconPreview() {
+    ComposeUiKitShowcaseTheme {
+        AppButton(
+            text = "Next",
+            onClick = {},
+            trailingIcon = {
+                Box(
+                    modifier = Modifier.size(8.dp)
+                )
             },
         )
     }
