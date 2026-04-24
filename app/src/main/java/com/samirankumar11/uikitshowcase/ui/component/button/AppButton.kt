@@ -43,3 +43,15 @@ private fun AppButtonPreview() {
         )
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+private fun AppButtonDisabledPreview() {
+    ComposeUiKitShowcaseTheme {
+        AppButton(
+            text = "Disabled",
+            onClick = {},
+            enabled = false,
+        )
+    }
+}
