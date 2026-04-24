@@ -1,32 +1,33 @@
 # -----------------------------
 # 🧠 Android Studio / IntelliJ
 # -----------------------------
-.idea/              # IDE config files (auto-generated, don't commit)
-*.iml               # Module files
+.idea/
+*.iml
 
 # -----------------------------
 # ⚙️ Gradle
 # -----------------------------
-.gradle/            # Gradle cache
-build/              # Build output (all modules)
+.gradle/
+build/
+*/build/
 
 # -----------------------------
 # 📱 Local configuration
 # -----------------------------
-local.properties    # SDK path (machine-specific, never commit)
+local.properties
 
 # -----------------------------
 # 🖥️ OS files
 # -----------------------------
-.DS_Store           # macOS system file
+.DS_Store
 
 # -----------------------------
 # 📸 Generated / temporary files
 # -----------------------------
-captures/           # Screenshots / recordings from Android Studio
+captures/
 
 # -----------------------------
 # 🧩 Native build (NDK / C++)
 # -----------------------------
-.externalNativeBuild/   # Native build output
-.cxx/                  # CMake build files
+.externalNativeBuild/
+.cxx/
