@@ -8,4 +8,6 @@ object AppSpacing {
     val md = 16.dp
     val lg = 24.dp
     val xl = 32.dp
+
+    val buttonHeight = 48.dp
 }
