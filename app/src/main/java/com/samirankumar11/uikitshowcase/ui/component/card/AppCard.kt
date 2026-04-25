@@ -1,6 +1,7 @@
 package com.samirankumar11.uikitshowcase.ui.component.card
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
@@ -31,16 +32,15 @@ fun AppCard(
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 private fun AppCardPreview() {
     ComposeUiKitShowcaseTheme {
         AppCard {
-            Box(
-                modifier = Modifier.size(160.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(text = "App Card")
+            Column {
+                Text(text = "Card Title")
+                Text(text = "Card content goes here.")
             }
         }
     }
