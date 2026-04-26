@@ -89,11 +89,7 @@ private fun AppDialogContent(
     }
 }
 
-@Preview(
-    showBackground = true,
-    widthDp = 360,
-    heightDp = 240,
-)
+
 @Composable
 @Preview(
     showBackground = true,
