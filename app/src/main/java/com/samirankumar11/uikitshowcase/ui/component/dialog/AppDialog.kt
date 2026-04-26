@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -17,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.samirankumar11.uikitshowcase.ui.theme.AppShapes
 import com.samirankumar11.uikitshowcase.ui.theme.AppSpacing
+import com.samirankumar11.uikitshowcase.ui.theme.AppTypography
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,13 +57,13 @@ private fun AppDialogContent(
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleLarge,
+                style = AppTypography.titleLarge,
             )
 
             description?.let {
                 Text(
                     text = it,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = AppTypography.bodyMedium,
                 )
             }
 
@@ -95,9 +95,15 @@ private fun AppDialogContent(
     heightDp = 240,
 )
 @Composable
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 240,
+)
 private fun AppDialogPreview() {
     ComposeUiKitShowcaseTheme {
-        AppDialogContent(
+        AppDialog(
+            onDismissRequest = {},
             title = "Delete Account",
             description = "Are you sure you want to delete your account?",
             onConfirm = {},
