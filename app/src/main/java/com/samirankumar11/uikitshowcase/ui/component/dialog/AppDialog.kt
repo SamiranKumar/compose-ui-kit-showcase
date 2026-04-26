@@ -1,9 +1,10 @@
 package com.samirankumar11.uikitshowcase.ui.component.dialog
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,31 +18,32 @@ import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 @Composable
 fun AppDialog(
     onDismissRequest: () -> Unit,
+    title: String,
+    description: String? = null,
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
 ) {
     BasicAlertDialog(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
     ) {
-        AppDialogSurface(
-            content = content,
-        )
-    }
-}
-
-
-@Composable
-private fun AppDialogSurface(
-    content: @Composable () -> Unit,
-) {
-    Surface(
-        shape = AppShapes.medium,
-    ) {
-        Box(
-            modifier = Modifier.padding(AppSpacing.md),
+        Surface(
+            shape = AppShapes.medium,
         ) {
-            content()
+            Column(
+                modifier = Modifier.padding(AppSpacing.md),
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                )
+
+                description?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+            }
         }
     }
 }
@@ -54,8 +56,22 @@ private fun AppDialogSurface(
 @Composable
 private fun AppDialogPreview() {
     ComposeUiKitShowcaseTheme {
-        AppDialogSurface {
-            Text(text = "App Dialog")
+        Surface(
+            shape = AppShapes.medium,
+        ) {
+            Column(
+                modifier = Modifier.padding(AppSpacing.md),
+            ) {
+                Text(
+                    text = "Delete Account",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+
+                Text(
+                    text = "Are you sure you want to delete your account?",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
         }
     }
 }
