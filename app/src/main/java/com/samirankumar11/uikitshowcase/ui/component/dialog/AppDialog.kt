@@ -1,13 +1,18 @@
 package com.samirankumar11.uikitshowcase.ui.component.dialog
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.samirankumar11.uikitshowcase.ui.theme.AppShapes
@@ -20,28 +25,64 @@ fun AppDialog(
     onDismissRequest: () -> Unit,
     title: String,
     description: String? = null,
+    onConfirm: () -> Unit,
+    onCancel: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BasicAlertDialog(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
     ) {
-        Surface(
-            shape = AppShapes.medium,
-        ) {
-            Column(
-                modifier = Modifier.padding(AppSpacing.md),
-            ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleLarge,
-                )
+        AppDialogContent(
+            title = title,
+            description = description,
+            onConfirm = onConfirm,
+            onCancel = onCancel,
+        )
+    }
+}
 
-                description?.let {
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
+@Composable
+private fun AppDialogContent(
+    title: String,
+    description: String?,
+    onConfirm: () -> Unit,
+    onCancel: () -> Unit,
+) {
+    Surface(
+        shape = AppShapes.medium,
+    ) {
+        Column(
+            modifier = Modifier.padding(AppSpacing.md),
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge,
+            )
+
+            description?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .padding(top = AppSpacing.md),
+                horizontalArrangement = Arrangement.spacedBy(AppSpacing.sm),
+            ) {
+                OutlinedButton(
+                    onClick = onCancel,
+                ) {
+                    Text(text = "Cancel")
+                }
+
+                Button(
+                    onClick = onConfirm,
+                ) {
+                    Text(text = "Confirm")
                 }
             }
         }
@@ -50,28 +91,17 @@ fun AppDialog(
 
 @Preview(
     showBackground = true,
-    widthDp = 320,
-    heightDp = 200,
+    widthDp = 360,
+    heightDp = 240,
 )
 @Composable
 private fun AppDialogPreview() {
     ComposeUiKitShowcaseTheme {
-        Surface(
-            shape = AppShapes.medium,
-        ) {
-            Column(
-                modifier = Modifier.padding(AppSpacing.md),
-            ) {
-                Text(
-                    text = "Delete Account",
-                    style = MaterialTheme.typography.titleLarge,
-                )
-
-                Text(
-                    text = "Are you sure you want to delete your account?",
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-            }
-        }
+        AppDialogContent(
+            title = "Delete Account",
+            description = "Are you sure you want to delete your account?",
+            onConfirm = {},
+            onCancel = {},
+        )
     }
 }
