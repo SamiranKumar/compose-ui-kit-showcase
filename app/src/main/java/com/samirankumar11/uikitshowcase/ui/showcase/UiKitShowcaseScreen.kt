@@ -4,83 +4,45 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.samirankumar11.uikitshowcase.ui.component.button.AppButton
-import com.samirankumar11.uikitshowcase.ui.component.card.AppCard
-import com.samirankumar11.uikitshowcase.ui.component.input.AppTextField
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.ButtonShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.CardShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.DialogShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.TextFieldShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.theme.AppSpacing
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
 @Composable
 fun UiKitShowcaseScreen(
     modifier: Modifier = Modifier,
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+            .verticalScroll(rememberScrollState())
+            .padding(AppSpacing.md),
+        verticalArrangement = Arrangement.spacedBy(AppSpacing.lg),
     ) {
-        Text(text = "AppButton")
+        ButtonShowcaseScreen()
 
-        AppButton(
-            text = "Login",
-            onClick = {},
-        )
+        TextFieldShowcaseScreen()
 
-        AppButton(
-            text = "Disabled",
-            onClick = {},
-            enabled = false,
-        )
+        CardShowcaseScreen()
 
-        AppButton(
-            text = "Loading",
-            onClick = {},
-            isLoading = true,
-        )
-
-        Text(text = "AppTextField")
-
-        AppTextField(
-            value = "",
-            onValueChange = {},
-            label = "Email",
-            placeholder = "Enter your email",
-        )
-
-        AppTextField(
-            value = "",
-            onValueChange = {},
-            label = "Email",
-            placeholder = "Enter your email",
-            isError = true,
-            errorMessage = "Invalid email address",
-        )
-
-        AppTextField(
-            value = "password123",
-            onValueChange = {},
-            label = "Password",
-            placeholder = "Enter password",
-            passwordVisible = false,
-        )
-
-        Text(text = "AppCard")
-
-        AppCard {
-            Column {
-                Text(text = "Card Title")
-                Text(text = "Card content goes here.")
-            }
-        }
+        DialogShowcaseScreen()
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    showSystemUi = true,
+)
 @Composable
 private fun UiKitShowcaseScreenPreview() {
     ComposeUiKitShowcaseTheme {
