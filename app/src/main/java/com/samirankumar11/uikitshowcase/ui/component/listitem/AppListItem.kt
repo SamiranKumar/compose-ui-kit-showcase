@@ -1,8 +1,11 @@
 package com.samirankumar11.uikitshowcase.ui.component.listitem
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -13,41 +16,107 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
+sealed interface AppListItemIcon {
+
+    data class Vector(
+        val imageVector: ImageVector,
+    ) : AppListItemIcon
+
+    data class Painter(
+        val painter: androidx.compose.ui.graphics.painter.Painter,
+    ) : AppListItemIcon
+}
+
 @Composable
 fun AppListItem(
     headlineContent: String,
     modifier: Modifier = Modifier,
     supportingContent: String? = null,
-    leadingIcon: ImageVector? = null,
+    leadingIcon: AppListItemIcon? = null,
     trailingContent: @Composable (() -> Unit)? = null,
 ) {
     ListItem(
-        modifier = modifier,
         headlineContent = {
-            Text(
-                text = headlineContent,
-            )
+            Text(text = headlineContent)
         },
-        supportingContent = supportingContent?.let { text ->
+        supportingContent = supportingContent?.let {
             {
-                Text(
-                    text = text,
-                )
+                Text(text = it)
             }
         },
         leadingContent = leadingIcon?.let { icon ->
             {
-                androidx.compose.material3.Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                )
+                when (icon) {
+                    is AppListItemIcon.Vector -> {
+                        Icon(
+                            imageVector = icon.imageVector,
+                            contentDescription = null,
+                        )
+                    }
+
+                    is AppListItemIcon.Painter -> {
+                        Icon(
+                            painter = icon.painter,
+                            contentDescription = null,
+                        )
+                    }
+                }
             }
         },
         trailingContent = trailingContent,
+        modifier = modifier,
     )
 }
 
+
+@Preview(showBackground = true)
+@Composable
+private fun AppListItemPreview() {
+    ComposeUiKitShowcaseTheme {
+        Column {
+            AppListItem(
+                headlineContent = "Samiran Kumar",
+                supportingContent = "samirankumar11@gmail.com",
+                leadingIcon = AppListItemIcon.Vector(
+                    imageVector = Icons.Default.Person,
+                )
+            )
+
+            AppListItem(
+                headlineContent = "Settings",
+                supportingContent = "Manage your account settings",
+                trailingContent = {
+                    Text(
+                        text = "Edit",
+                        fontSize = 14.sp,
+                    )
+                },
+            )
+        }
+    }
+}
+
+
 private val PreviewIcon = ImageVector.Builder(
+    name = "PreviewIcon",
+    defaultWidth = 24.dp,
+    defaultHeight = 24.dp,
+    viewportWidth = 24f,
+    viewportHeight = 24f,
+).apply {
+    path(
+        fill = androidx.compose.ui.graphics.SolidColor(Color.Blue),
+    ) {
+        moveTo(12f, 2f)
+        lineTo(2f, 12f)
+        lineTo(12f, 22f)
+        lineTo(22f, 12f)
+        close()
+    }
+}.build()
+
+
+private val PreviewIcon1 = ImageVector.Builder(
     name = "PreviewIcon",
     defaultWidth = 24.dp,
     defaultHeight = 24.dp,
@@ -69,15 +138,22 @@ private val PreviewIcon = ImageVector.Builder(
     }
 }.build()
 
-@Preview(showBackground = true)
+
+
+@Preview(
+    showBackground = true,
+    showSystemUi = true,
+)
 @Composable
-private fun AppListItemPreview() {
+private fun AppListItemPreview2() {
     ComposeUiKitShowcaseTheme {
         Column {
             AppListItem(
                 headlineContent = "Samiran Kumar",
                 supportingContent = "samirankumar11@gmail.com",
-                leadingIcon = PreviewIcon,
+                leadingIcon = AppListItemIcon.Vector(
+                    imageVector = PreviewIcon,
+                ),
             )
 
             AppListItem(
