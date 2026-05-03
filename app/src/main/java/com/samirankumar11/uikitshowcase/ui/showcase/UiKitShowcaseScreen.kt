@@ -9,10 +9,24 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.AvatarShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.BottomBarShowcaseScreen
 import com.samirankumar11.uikitshowcase.ui.showcase.screen.ButtonShowcaseScreen
 import com.samirankumar11.uikitshowcase.ui.showcase.screen.CardShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.CheckboxShowcaseScreen
 import com.samirankumar11.uikitshowcase.ui.showcase.screen.DialogShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.DividerShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.EmptyStateShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.IconButtonShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.IconShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.ListItemShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.ProgressIndicatorShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.RadioButtonShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.SearchBarShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.SnackBarShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.SwitchShowcaseScreen
 import com.samirankumar11.uikitshowcase.ui.showcase.screen.TextFieldShowcaseScreen
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.TopBarShowcaseScreen
 import com.samirankumar11.uikitshowcase.ui.theme.AppSpacing
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
@@ -25,7 +39,7 @@ fun UiKitShowcaseScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .padding(AppSpacing.md),
         verticalArrangement = Arrangement.spacedBy(AppSpacing.lg),
     ) {
@@ -36,6 +50,34 @@ fun UiKitShowcaseScreen(
         CardShowcaseScreen()
 
         DialogShowcaseScreen()
+
+        DividerShowcaseScreen()
+
+        IconShowcaseScreen()
+
+        IconButtonShowcaseScreen()
+
+        ListItemShowcaseScreen()
+
+        TopBarShowcaseScreen()
+
+        BottomBarShowcaseScreen()
+
+        SwitchShowcaseScreen()
+
+        CheckboxShowcaseScreen()
+
+        RadioButtonShowcaseScreen()
+
+        ProgressIndicatorShowcaseScreen()
+
+        SearchBarShowcaseScreen()
+
+        SnackBarShowcaseScreen()
+
+        AvatarShowcaseScreen()
+
+        EmptyStateShowcaseScreen()
     }
 }
 
