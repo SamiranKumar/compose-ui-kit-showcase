@@ -11,6 +11,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
+/**
+ * Wraps Material 3 [Icon] for the project’s design system and keeps the image
+ * vector API consistent across the UI kit.
+ *
+ * @param imageVector The vector asset to render.
+ * @param contentDescription Accessibility text describing the icon. Pass null when
+ * the icon is decorative.
+ * @param modifier Optional layout modifier.
+ */
 @Composable
 fun AppIcon(
     imageVector: ImageVector,
