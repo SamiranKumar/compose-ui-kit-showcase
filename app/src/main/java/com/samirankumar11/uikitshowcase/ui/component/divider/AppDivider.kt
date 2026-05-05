@@ -10,6 +10,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.ui.unit.dp
 
+/**
+ * Displays a thin horizontal divider used to separate blocks of content.
+ *
+ * This is a lightweight Material 3 divider wrapper that preserves the project’s
+ * current spacing and visual style while allowing callers to add optional layout
+ * padding through the [modifier].
+ *
+ * @param modifier Optional layout modifier applied to the divider.
+ *
+ * Example:
+ * ```kotlin
+ * AppDivider()
+ * ```
+ */
 @Composable
 fun AppDivider(
     modifier: Modifier = Modifier,
