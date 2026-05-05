@@ -16,6 +16,20 @@ import androidx.compose.ui.unit.dp
 import com.samirankumar11.uikitshowcase.ui.theme.AppTypography
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
+/**
+ * A center-aligned top app bar for simple screen headers.
+ *
+ * The component exposes an optional navigation icon and trailing action slot while
+ * preserving the project’s Material 3 top app bar styling and behavior.
+ *
+ * @param title Main title shown in the bar.
+ * @param modifier Optional layout modifier.
+ * @param navigationIcon Optional icon displayed at the start of the bar. When null,
+ * the navigation slot remains empty.
+ * @param onNavigationClick Callback invoked when the navigation icon is tapped. This is
+ * ignored when [navigationIcon] is null.
+ * @param actions Composable content rendered in the trailing action area.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppTopBar(
