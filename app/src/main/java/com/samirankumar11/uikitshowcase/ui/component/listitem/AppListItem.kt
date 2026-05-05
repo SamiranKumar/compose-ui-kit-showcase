@@ -16,6 +16,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
+/**
+ * Represents the supported content types for the leading area inside [AppListItem].
+ */
 sealed interface AppListItemIcon {
 
     data class Vector(
@@ -27,6 +30,20 @@ sealed interface AppListItemIcon {
     ) : AppListItemIcon
 }
 
+/**
+ * Displays a compact list row with a headline, optional supporting text,
+ * leading media, and trailing content.
+ *
+ * This component mirrors the Material 3 list item pattern and is intended for
+ * simple information rows without introducing custom layout behavior.
+ *
+ * @param headlineContent Primary text shown in the row.
+ * @param modifier Optional layout modifier.
+ * @param supportingContent Secondary text shown beneath the headline when provided.
+ * @param leadingIcon Optional icon or image placed at the start of the row.
+ * @param trailingContent Optional composable content rendered at the end of the row,
+ * such as a label, button, or status.
+ */
 @Composable
 fun AppListItem(
     headlineContent: String,
