@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -19,6 +20,15 @@ import com.samirankumar11.uikitshowcase.ui.theme.AppSpacing
 import com.samirankumar11.uikitshowcase.ui.theme.AppTypography
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
+
+enum class AppDialogType {
+    CONFIRMATION,
+    INFORMATION,
+    WARNING,
+    ERROR,
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppDialog(
@@ -28,6 +38,7 @@ fun AppDialog(
     onConfirm: () -> Unit,
     onCancel: () -> Unit,
     modifier: Modifier = Modifier,
+    type: AppDialogType = AppDialogType.INFORMATION,
 ) {
     BasicAlertDialog(
         onDismissRequest = onDismissRequest,
@@ -38,6 +49,7 @@ fun AppDialog(
             description = description,
             onConfirm = onConfirm,
             onCancel = onCancel,
+            type = type,
         )
     }
 }
@@ -48,7 +60,22 @@ private fun AppDialogContent(
     description: String?,
     onConfirm: () -> Unit,
     onCancel: () -> Unit,
+    type: AppDialogType,
 ) {
+    val titleColor = when (type) {
+        AppDialogType.INFORMATION ->
+            MaterialTheme.colorScheme.primary
+
+        AppDialogType.CONFIRMATION ->
+            MaterialTheme.colorScheme.primary
+
+        AppDialogType.WARNING ->
+            MaterialTheme.colorScheme.tertiary
+
+        AppDialogType.ERROR ->
+            MaterialTheme.colorScheme.error
+    }
+
     Surface(
         shape = AppShapes.medium,
     ) {
@@ -58,6 +85,7 @@ private fun AppDialogContent(
             Text(
                 text = title,
                 style = AppTypography.titleLarge,
+                color = titleColor,
             )
 
             description?.let {
@@ -82,7 +110,14 @@ private fun AppDialogContent(
                 Button(
                     onClick = onConfirm,
                 ) {
-                    Text(text = "Confirm")
+                    Text(
+                        text = when (type) {
+                            AppDialogType.INFORMATION -> "OK"
+                            AppDialogType.CONFIRMATION -> "Confirm"
+                            AppDialogType.WARNING -> "Continue"
+                            AppDialogType.ERROR -> "Retry"
+                        },
+                    )
                 }
             }
         }
@@ -99,11 +134,12 @@ private fun AppDialogContent(
 private fun AppDialogPreview() {
     ComposeUiKitShowcaseTheme {
         AppDialog(
-            onDismissRequest = {},
             title = "Delete Account",
             description = "Are you sure you want to delete your account?",
+            onDismissRequest = {},
             onConfirm = {},
             onCancel = {},
+            type = AppDialogType.WARNING,
         )
     }
 }
