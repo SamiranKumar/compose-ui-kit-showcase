@@ -51,8 +51,12 @@ fun AppDatePicker(
 @Composable
 private fun AppDatePickerPreview() {
     ComposeUiKitShowcaseTheme {
-        DatePicker(
-            state = rememberDatePickerState(),
+        AppDatePicker(
+            visible = true,
+            onDismiss = {},
+            onConfirm = { selectedDateMillis ->
+                // Preview only
+            },
         )
     }
 }
