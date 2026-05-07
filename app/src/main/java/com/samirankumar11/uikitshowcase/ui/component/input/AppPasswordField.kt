@@ -1,22 +1,23 @@
-package com.samirankumar11.uikitshowcase.ui.component.input
+package com.samirankumar11.uikitshowcase.ui.component.textfield
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import com.samirankumar11.uikitshowcase.ui.theme.AppShapes
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
 @Composable
@@ -25,73 +26,67 @@ fun AppPasswordField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     label: String = "Password",
-    placeholder: String = "Enter password",
-    isError: Boolean = false,
-    errorMessage: String? = null,
-    passwordVisible: Boolean = false,
-    onPasswordToggle: (() -> Unit)? = null,
     enabled: Boolean = true,
+    isError: Boolean = false,
+    supportingText: String? = null,
 ) {
-    Column(modifier = modifier) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = modifier,
-            label = {
-                Text(text = label)
-            },
-            placeholder = {
-                Text(text = placeholder)
-            },
-            singleLine = true,
-            enabled = enabled,
-            isError = isError,
-            shape = AppShapes.medium,
-            visualTransformation = if (passwordVisible) {
-                VisualTransformation.None
-            } else {
-                PasswordVisualTransformation()
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password,
-            ),
-            trailingIcon = {
-                if (onPasswordToggle != null) {
-                    IconButton(onClick = onPasswordToggle) {
-                        Icon(
-                            imageVector = if (passwordVisible) {
-                                Icons.Default.VisibilityOff
-                            } else {
-                                Icons.Default.Visibility
-                            },
-                            contentDescription = if (passwordVisible) {
-                                "Hide password"
-                            } else {
-                                "Show password"
-                            },
-                        )
-                    }
-                }
-            },
-        )
+    var passwordVisible by remember { mutableStateOf(false) }
 
-        if (isError && errorMessage != null) {
-            Text(
-                text = errorMessage,
-                color = MaterialTheme.colorScheme.error,
-            )
-        }
-    }
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        enabled = enabled,
+        isError = isError,
+        label = {
+            Text(text = label)
+        },
+        supportingText = supportingText?.let {
+            {
+                Text(text = it)
+            }
+        },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password,
+        ),
+        visualTransformation = if (passwordVisible) {
+            VisualTransformation.None
+        } else {
+            PasswordVisualTransformation()
+        },
+        trailingIcon = {
+            IconButton(
+                onClick = {
+                    passwordVisible = !passwordVisible
+                },
+            ) {
+                Icon(
+                    imageVector = if (passwordVisible) {
+                        Icons.Default.VisibilityOff
+                    } else {
+                        Icons.Default.Visibility
+                    },
+                    contentDescription = if (passwordVisible) {
+                        "Hide password"
+                    } else {
+                        "Show password"
+                    },
+                )
+            }
+        },
+    )
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+)
 @Composable
 private fun AppPasswordFieldPreview() {
     ComposeUiKitShowcaseTheme {
         AppPasswordField(
-            value = "secret123",
+            value = "password123",
             onValueChange = {},
-            onPasswordToggle = {},
         )
     }
 }
