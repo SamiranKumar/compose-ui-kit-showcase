@@ -1,4 +1,5 @@
 package com.samirankumar11.uikitshowcase.ui.showcase
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,6 +9,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.samirankumar11.uikitshowcase.ui.showcase.screen.AdvancedComponentsShowcaseScreen
 import com.samirankumar11.uikitshowcase.ui.showcase.screen.AvatarShowcaseScreen
 import com.samirankumar11.uikitshowcase.ui.showcase.screen.BottomBarShowcaseScreen
 import com.samirankumar11.uikitshowcase.ui.showcase.screen.ButtonShowcaseScreen
@@ -89,31 +91,39 @@ fun UiKitShowcaseScreen(
 
         EmptyStateShowcaseScreen()
 
+        // components()
 
-        OutlinedButtonShowcaseScreen()
-
-        TextButtonShowcaseScreen()
-
-        IconTextButtonShowcaseScreen()
-
-        PasswordFieldShowcaseScreen()
-
-        OtpFieldShowcaseScreen()
-
-        CircularProgressShowcaseScreen()
-
-        LinearProgressShowcaseScreen()
-
-        ToggleButtonShowcaseScreen()
-
-        SegmentedButtonShowcaseScreen()
-
-        RadioGroupShowcaseScreen()
-
-        TextShowcaseScreen()
+        AdvancedComponentsShowcaseScreen()
 
     }
 }
+
+
+@Composable
+fun components() {
+    OutlinedButtonShowcaseScreen()
+
+    TextButtonShowcaseScreen()
+
+    IconTextButtonShowcaseScreen()
+
+    PasswordFieldShowcaseScreen()
+
+    OtpFieldShowcaseScreen()
+
+    CircularProgressShowcaseScreen()
+
+    LinearProgressShowcaseScreen()
+
+    ToggleButtonShowcaseScreen()
+
+    SegmentedButtonShowcaseScreen()
+
+    RadioGroupShowcaseScreen()
+
+    TextShowcaseScreen()
+}
+
 
 @Preview(
     showBackground = true,
