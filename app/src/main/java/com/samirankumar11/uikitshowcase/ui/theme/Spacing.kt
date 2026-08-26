@@ -10,4 +10,5 @@ object AppSpacing {
     val xl = 32.dp
 
     val buttonHeight = 48.dp
+    val textFieldHeight = 56.dp
 }
