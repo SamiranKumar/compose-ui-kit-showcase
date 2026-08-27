@@ -1,9 +1,9 @@
 [versions]
 # Android Gradle Plugin
-agp = "8.13.2"
+agp = "9.3.2"
 
 # Kotlin (also used by Compose compiler plugin)
-kotlin = "2.0.21"
+kotlin = "2.2.10"
 
 # Core Android
 coreKtx = "1.18.0"
