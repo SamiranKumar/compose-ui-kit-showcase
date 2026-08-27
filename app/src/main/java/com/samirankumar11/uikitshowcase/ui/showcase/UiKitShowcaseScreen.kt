@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.samirankumar11.uikitshowcase.ui.component.button.AppButton
+import com.samirankumar11.uikitshowcase.ui.component.card.AppCard
 import com.samirankumar11.uikitshowcase.ui.component.input.AppTextField
 import com.samirankumar11.uikitshowcase.ui.theme.ComposeUiKitShowcaseTheme
 
@@ -68,18 +69,14 @@ fun UiKitShowcaseScreen(
             passwordVisible = false,
         )
 
-        AppTextField(
-            value = "",
-            onValueChange = {},
-            label = "Search",
-            placeholder = "Search...",
-            leadingIcon = {
-                Text("@")
-            },
-            trailingIcon = {
-                Text("X")
-            },
-        )
+        Text(text = "AppCard")
+
+        AppCard {
+            Column {
+                Text(text = "Card Title")
+                Text(text = "Card content goes here.")
+            }
+        }
     }
 }
 
